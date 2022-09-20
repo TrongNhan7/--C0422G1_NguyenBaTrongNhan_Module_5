@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav" th:fragment="navbar">
+    <div class="container px-4 px-lg-5">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/">Facility</a></li>
+                <li class="nav-item"><a class="nav-link" href="/">Customer</a></li>
+                <li class="nav-item"><a class="nav-link" href="/">Contract</a></li>
+                <li class="nav-item"><a class="nav-link" href="/">Employee</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-5" th:fragment="footer">
+
+    <footer class="text-center text-lg-start" style="background: url('img2/324ea651d37f6e3b97ee0516b3f2384d.jpg')">
+        <div class="container d-flex justify-content-center py-5">
+            <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #14a2f9;">
+                <i class="fab fa-facebook-f"></i>
+            </button>
+            <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #F00600;">
+                <i class="fab fa-youtube"></i>
+            </button>
+            <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #f06d2f;">
+                <i class="fab fa-instagram"></i>
+            </button>
+            <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #1d9bf0;">
+                <i class="fab fa-twitter"></i>
+            </button>
+        </div>
+
+        <!-- Copyright -->
+        <div class="text-center text-white p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2022:
+            <a class="text-white" style="text-decoration: none" href="https://mdbootstrap.com/">Nhan Ba Trong</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+</div>
+</body>
+</html>
