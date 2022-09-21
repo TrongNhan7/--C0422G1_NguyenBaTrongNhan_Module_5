@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<body class="bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
+    <a href="" class="navbar-brand p-0">
+        <h1 class="text-primary m-0">Furama Resort</h1>
+        <!-- <img2 src="img2/logo.png" alt="Logo"> -->
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="fa fa-bars"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto py-0 pe-4">
+            <a href="../homeNew.html" class="nav-item nav-link active">Home</a>
+            <a href="/" class="nav-item nav-link">Facility</a>
+            <a href="/" class="nav-item nav-link">Customer</a>
+            <a href="/" class="nav-item nav-link">Employee</a>
+            <a href="/" class="nav-item nav-link">Contract</a>
+        </div>
+        <a href="" class="btn btn-primary py-2 px-4">Login</a>
+    </div>
+</nav>
+<div style="text-align: center">
+    <h1>CREATE FACILITY</h1>
+</div>
+
+<div class="container"
+     style="background-image: url('../img2/dragon-create.jpg');background-size: cover; height: 100%; width: 140vh">
+    <div class="row">
+        <div class="col-lg-3">
+
+        </div>
+
+        <div class="col-lg-6" style="color: white;font-size: 30px">
+            <form action="/facility/create" method="post" th:object="${facilityDto}">
+                <div class="col-md-12 ">
+                    <label for="facilityType" class="form-label">Loại dịch vụ</label>
+                    <select id="facilityType" name="type" onchange="chooseServiceType()"
+                            th:field="*{facilityType.id}" class="form-select">
+                        <option value="0">Chọn loại dịch vụ</option>
+                        <option th:each="type : ${facilityType}"
+                                th:value="${type.id}"
+                                th:text="${type.name}"></option>
+                    </select>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="name" class="form-label">Tên dịch vụ</label>
+                    <input type="text" class="form-control" id="name" th:field="*{nameService}">
+                    <div class="mb-4 text-danger" th:errors="*{nameService}"></div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="area" class="form-label">Diện tích</label>
+                    <input type="number" class="form-control" id="area" name="area" th:field="*{area}">
+                    <div class="mb-4 text-danger" th:errors="*{area}"></div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="cost" class="form-label">Chi phí thuê</label>
+                    <input type="number" class="form-control" id="cost" name="cost" th:field="*{cost}">
+                    <div class="mb-4 text-danger" th:errors="*{cost}"></div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="max_people" class="form-label">Số lượng người tối đa </label>
+                    <input type="number" class="form-control" id="max_people" name="max_people"
+                           th:field="*{maxPeople}">
+                    <div class="mb-4 text-danger" th:errors="*{maxPeople}"></div>
+                </div>
+
+                <div class="col-md-12">
+                    <label class="form-label">Kiểu thuê</label>
+                    <select name="rentalType" class="form-select" th:field="*{rentType}">
+                        <option value="" disabled selected>Chọn kiểu thuê</option>
+                        <option th:each="rent:${rentType}"
+                                th:text="${rent.name}"
+                                th:value="${rent.id}"></option>
+                    </select>
+                </div>
+
+                <div class="col-md-12 " id="standard_room" style="display: none">
+                    <label class="form-label">Tiêu chuẩn phòng </label>
+                    <select name="rentalType" class="form-select" th:field="*{standardRoom}">
+                        <option value="">Chọn phòng</option>
+                        <option th:text="Normal"
+                                th:value="Normal">
+                        </option>
+                        <option th:text="Vip"
+                                th:value="Vip">
+                        </option>
+
+                    </select>
+                </div>
+
+                <div class="col-md-12 " id="description_other_convenience" style="display: none">
+                    <label for="description" class="form-label">Mô tả tiện nghi khác</label>
+                    <input type="text" class="form-control" id="description"
+                           name="description_other_convenience" th:field="*{descriptionOtherConvenience}">
+                    <div class="mb-4 text-danger" th:errors="*{descriptionOtherConvenience}"></div>
+                </div>
+
+                <div class="col-md-12 " id="pool_area" style="display: none">
+                    <label for="poolArea" class="form-label">Diện tích hồ bơi </label>
+                    <input type="text" class="form-control" id="poolArea" name="pool_area" th:field="*{areaPool}">
+                    <div class="mb-4 text-danger" th:errors="*{areaPool}"></div>
+                </div>
+
+                <div class="col-md-12" id="number_of_floors" style="display: none">
+                    <label for="number_of_floors_1" class="form-label">Số tầng </label>
+                    <input type="number" class="form-control" id="number_of_floors_1" name="number_of_floors"
+                           th:field="*{numberOfFloors}">
+                    <div class="mb-4 text-danger" th:errors="*{numberOfFloors}"></div>
+                </div>
+
+                <div class="col-md-12 " id="facility_free" style="display: none">
+                    <label for="facility_free_1" class="form-label">Dịch vụ miễn phí đi kèm </label>
+                    <input type="text" class="form-control" id="facility_free_1" name="facility_free"
+                           th:field="*{freeService}">
+                    <div class="mb-4 text-danger" th:errors="*{freeService}"></div>
+                </div>
+
+                <div class="col-12 mt-3" align="center">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+
+            </form>
+        </div>
+
+
+        <div class="col-lg-3">
+
+        </div>
+    </div>
+</div>
+<script src="..\js/bootstrap.min.js"></script>
+<script>
+
+    function chooseServiceType() {
+        let type = document.getElementById("facilityType").value;
+        switch (type) {
+            case '0':
+                document.getElementById("standard_room").style.display = "none";
+                document.getElementById("description_other_convenience").style.display = "none";
+                document.getElementById("pool_area").style.display = "none";
+                document.getElementById("number_of_floors").style.display = "none";
+                document.getElementById("facility_free").style.display = "none";
+                break;
+            case "1":
+                document.getElementById("standard_room").style.display = "block";
+                document.getElementById("description_other_convenience").style.display = "block";
+                document.getElementById("pool_area").style.display = "block";
+                document.getElementById("number_of_floors").style.display = "block";
+                document.getElementById("facility_free").style.display = "none";
+                document.getElementById("facility_free").value = "X";
+                break;
+            case "2":
+                document.getElementById("standard_room").style.display = "block";
+                document.getElementById("description_other_convenience").style.display = "block";
+                document.getElementById("pool_area").style.display = "none";
+                document.getElementById("pool_area").value = 0;
+                document.getElementById("number_of_floors").style.display = "block";
+                document.getElementById("facility_free").style.display = "none";
+                document.getElementById("facility_free").value = "X";
+                break;
+            case "3":
+                document.getElementById("standard_room").style.display = "none";
+                document.getElementById("description_other_convenience").style.display = "block";
+                document.getElementById("pool_area").style.display = "none";
+                document.getElementById("number_of_floors").style.display = "none";
+                document.getElementById("facility_free").style.display = "block";
+                document.getElementById("standard_room").value = "X";
+                document.getElementById("pool_area").value = 0;
+                document.getElementById("number_of_floors").value = 0;
+                break;
+        }
+    }
+</script>
+</body>
+</html>
