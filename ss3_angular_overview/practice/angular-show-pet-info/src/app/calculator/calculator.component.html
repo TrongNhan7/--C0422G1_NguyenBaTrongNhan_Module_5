@@ -1,0 +1,20 @@
+<p>calculator works!</p>
+<label>
+  Input number 1:
+  <input type="number" [(ngModel)]="number1">
+</label>
+<br>
+<select [(ngModel)]="operator">
+  <option value="add">+</option>
+  <option value="minus">-</option>
+  <option value="multiply">x</option>
+  <option value="division">/</option>
+</select>
+<br>
+<label>
+  Input number 2:
+  <input type="number" [(ngModel)]="number2">
+</label>
+<br>
+<button (click)="clickResult(number1,number2,operator)">Tính</button>
+<p>Result: {{result}}</p>
