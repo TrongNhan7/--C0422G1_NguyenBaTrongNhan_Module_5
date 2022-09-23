@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="..\css/bootstrap.css">
+</head>
+<body>
+<nav th:replace="~{layout::header}"></nav>
+<div style="text-align: center">
+    <h1>CREATE CONTRACT</h1>
+</div>
+<div th:if="${mess != null}">
+    <p style="color: red" th:text="${mess}"></p>
+</div>
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col-lg-3">
+            <img src="..\img\4056083.jpg" class="w-100 " style="height: 300px">
+            <img src="..\img\biet-thu.jpg" class="w-100 mt-3" style="height: 300px">
+        </div>
+
+        <div class="col-lg-6">
+            <form action="/contract/create" method="post" th:object="${contractDto}">
+
+                <div class="col-md-12">
+                    <label for="starDate" class="form-label">Ngày bắt đầu</label>
+                    <input type="date" class="form-control" id="starDate" th:field="*{startDate}">
+                    <div class="mb-4 text-danger" th:errors="*{startDate}"></div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="endDate" class="form-label">Ngày kết thúc</label>
+                    <input type="date" class="form-control" id="endDate" th:field="*{endDate}">
+                    <div class="mb-4 text-danger" th:errors="*{endDate}"></div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="deposit" class="form-label">Tiền cọc</label>
+                    <input type="number" class="form-control" id="deposit" th:field="*{deposit}">
+                    <div class="mb-4 text-danger" th:errors="*{deposit}"></div>
+                </div>
+
+                <div class="col-md-12">
+                    <label class="form-label">Chọn nhân viên</label>
+                    <select name="employee" class="form-select" th:field="*{employee.id}">
+                        <option th:value="null">--------------</option>
+                        <option th:each="emp:${employeeList}"
+                                th:text="${emp.name}"
+                                th:value="${emp.id}"></option>
+                    </select>
+                    <div class="mb-4 text-danger" th:errors="*{employee}"></div>
+                </div>
+
+                <div class="col-md-12">
+                    <label class="form-label">Chọn khách hàng</label>
+                    <select name="customer" class="form-select" th:field="*{customer.id}">
+                        <option th:value="null">--------------</option>
+                        <option th:each="cus:${customerList}"
+                                th:text="${cus.customerName}"
+                                th:value="${cus.id}"></option>
+                    </select>
+                    <div class="mb-4 text-danger" th:errors="*{customer}"></div>
+                </div>
+
+                <div class="col-md-12">
+                    <label class="form-label">Chọn loại dịch vụ</label>
+                    <select id="selectFacility" class="form-select" th:field="*{facility.id}">
+                        <option th:value="null">--------------</option>
+                        <option th:each="fac:${facilityList}"
+                                th:text="${fac.nameService}"
+                                th:value="${fac.id}"></option>
+                    </select>
+                    <div class="mb-4 text-danger" th:errors="*{facility}"></div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="totalMoney" class="form-label">Tổng tiền</label>
+                    <input type="number" class="form-control" id="totalMoney">
+                </div>
+
+                <div id="attach-facility" style="display: none">
+                    <label for="attachFacilityId" class="form-label">Attach Facility</label>
+                    <select id="attachFacilityId" class="form-select">
+                        <option th:value="null">----------------------</option>
+                        <option th:each="attach : ${attachFacilityList}"
+                                th:value="${attach.id}"
+                                th:text="${attach.name} + '------ Giá thuê: ' + ${attach.cost}"></option>
+                    </select>
+                    <input type="hidden" class="form-control" id="attachId">
+                </div>
+
+                <div class="col-md-12" id="quantityDiv" style="display: none">
+                    <label for="totalMoney" class="form-label">Số lượng dịch vụ đi kèm</label>
+                    <input type="number" class="form-control" id="quantity">
+                </div>
+
+
+                <div class="col-12 mt-3" align="center">
+                    <button type="submit" class="btn btn-primary" id="create">Save</button>
+                </div>
+
+            </form>
+
+            <input type="hidden" class="form-control" id="contractLast" th:value="${contractLast.id}">
+
+        </div>
+
+
+        <div class="col-lg-3">
+            <img src="..\img\4056083.jpg" class="w-100 " style="height: 300px">
+            <img src="..\img\biet-thu.jpg" class="w-100 mt-3" style="height: 300px">
+        </div>
+    </div>
+</div>
+<script src="js/bootstrap.js"></script>
+
+<script
+        src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+    let attachCost = 0;
+
+    $('#selectFacility').on('change', function () {
+        let id = $('#selectFacility').val();
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "GET",
+            url: "http://localhost:8080/contractRest/" + id,
+            success: function (facility) {
+                console.log(facility);
+                $('#attach-facility').show();
+                $('#quantityDiv').show();
+                $('#quantity').val(1);
+                $("#totalMoney").val(facility.cost);
+            },
+            error: function (resultError) {
+                console.log(Error);
+            }
+        });
+    })
+
+    async function findCostAttach(idAttach) {
+        const result = await $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "GET",
+            url: "http://localhost:8080/contractRest/findAttach?id=" + idAttach,
+            success: function (attach) {
+                attachCost = attach.cost;
+                console.log(attachCost + "at")
+                return attachCost;
+            },
+            error: function (resultError) {
+                console.log(Error);
+            }
+        });
+        return result;
+    }
+
+
+    $('#attachFacilityId,#quantity').on('change', async function () {
+        let id = $('#selectFacility').val();
+        console.log("id" + $('#attachFacilityId').val())
+        await findCostAttach($('#attachFacilityId').val())
+        console.log("attachCost:" + attachCost);
+        let quantity = parseFloat($('#quantity').val());
+        let totalMoneyAttach = attachCost * quantity;
+        if (quantity < 1) {
+            alert("Số lượng phải lớn hơn 0");
+            parseFloat($('#quantity').val(1))
+        }
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "GET",
+            url: "http://localhost:8080/contractRest/" + id,
+            success: function (facility) {
+                let facilitySelect = parseFloat(facility.cost);
+                $('#totalMoney').val(facilitySelect + totalMoneyAttach);
+            },
+            error: function (resultError) {
+                console.log(Error);
+            }
+        });
+    });
+
+    $('#create').on('click', function () {
+        let contractId = parseInt($('#contractLast').val()) + 1;
+        let attachDetail = $('#attachFacilityId').val();
+        let quantity = $('#quantity').val();
+
+        let contractDetailDto = {
+            contract: {
+                id: contractId
+            },
+            attachFacility: {
+                id: attachDetail
+            },
+            quantity: quantity
+        };
+        alert(contractId + " " + attachDetail + " " + quantity);
+
+         $.ajax({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        type: "POST",
+        //tên API
+        data: JSON.stringify(contractDetailDto),
+        url: "http://localhost:8080/contract-detail/create",
+
+        //xử lý khi thành công
+        success: function (resultSuccess) {
+            alert("Bạn đã thêm thành công!!!")
+            window.location.reload();
+
+        },
+        error: function (resultError) {
+            alert('Nhập Quantity > 0');
+        }
+
+    });
+
+    });
+</script>
+</body>
+</html>
