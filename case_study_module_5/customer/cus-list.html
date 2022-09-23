@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer List</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<body style="background-image: url('../img2/8501.jpg');background-size: cover; height: 100%;">
+<nav th:replace="~{layout::header}"></nav>
+<div style="text-align: center">
+    <h1>CUSTOMER</h1>
+</div>
+<div th:if="${mess != null}">
+    <p style="color: red; font-size: 30px" th:text="${mess}" ></p>
+</div>
+
+<div class="row">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="btn btn-warning" th:href="@{/customer}">Home Customer</a>
+            <a class="btn btn-warning ms-3" th:href="@{/customer/create}">Create Customer</a>
+            <div class="collapse navbar-collapse" id="mynavbar">
+                <ul class="navbar-nav me-auto">
+                </ul>
+                <form class="d-flex" action="/customer">
+                    <input class="form-control me-2" type="text" placeholder="Search" name="keyword" th:value="${keyword}">
+                    <button class="btn btn-primary" type="submit" value="Search">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container ">
+    <table id="tableCustomer" class="table table-striped table-bordered table table-dark table-striped"
+           style="width:100%">
+        <thead>
+        <tr>
+            <th>STT</th>
+            <th>Name</th>
+            <th>Birthday</th>
+            <th>Gender</th>
+            <th>Id Card</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Ardress</th>
+            <th>Customer Type</th>
+            <th>Detail</th>
+            <th style="text-align: center">Edit</th>
+            <th style="text-align: center">Delete</th>
+        </tr>
+
+        <tr>
+        <td>1</td>
+        <td>Nhân</td>
+        <td>02/04/1994</td>
+        <td>Nam</td>
+        <td>201702955</td>
+        <td>0905872269</td>
+        <td>batrongnhan@gmail.com</td>
+        <td>Đà Nẵng</td>
+        <td>Supper Vip</td>
+            <td>
+                <a class="btn btn-outline-info" href="/">Detail</a>
+            </td>
+            <td>
+                <a href="cus-edit.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                         class="bi bi-pencil-square" viewBox="0 0 16 16">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd"
+                              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                    </svg>
+                </a>
+            </td>
+            <td style="text-align: center">
+                <button th:attr="onclick=|showInfoDelete('${c.id}','${c.customerName}')|"  type="button" class="btn btn-primary"
+                        data-bs-toggle="modal" data-bs-target="#delete">
+                    Delete
+                </button>
+            </td>
+        </tr>
+    </table>
+    <div>
+        <a th:href="@{'/customer'(page=${customerList.number - 1},keyword=${keyword})}"
+           th:if="${customerList.hasPrevious()}">
+            <button type="button" class="btn btn-danger btn-rounded">Previous</button></a>
+        <span th:text="${customerList.number + 1}"></span>/<span th:text="${customerList.totalPages}"></span>
+        <a th:href="@{'/customer'(page=${customerList.number + 1},keyword=${keyword})}"
+           th:if="${customerList.hasNext()}"><button type="button" class="btn btn-danger btn-rounded">Next</button></a>
+    </div>
+</div>
+<div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="/customer/delete">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Customer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="deleteId" name="id">
+                    <span>Bạn có muốn xóa Customer: </span><span id="deleteName"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-secondary">Delete</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/bootstrap.min.js"></script>
+<script>
+    function showInfoDelete(id, name) {
+        document.getElementById("deleteId").value = id;
+        document.getElementById("deleteName").innerText = name;
+    }
+
+    // function showInfoDelete(id) {
+    //     document.getElementById("deleteId").value = id;
+    // }
+</script>
+</body>
+</html>
