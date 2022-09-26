@@ -1,0 +1,27 @@
+<table class="table table-info">
+  <tr style="background: black;color: white">
+    <th>#</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Deposit</th>
+    <th>Total money</th>
+    <th>Facility</th>
+    <th>Customer</th>
+    <th colspan="2">Attach facility list</th>
+  </tr>
+  <tr *ngFor="let contract of contracts;let i = index" [attr.data-index]="i ">
+    <td>{{i+1}}</td>
+    <td>{{contract.startDate}}</td>
+    <td>{{contract.endDate}}</td>
+    <td>{{contract.deposit}}</td>
+    <td>{{contract.total}}</td>
+    <td>{{contract.customer.name}}</td>
+    <td>{{contract.facility.name}}</td>
+    <td>
+      <button class="btn btn-warning">Edit</button>
+    </td>
+    <td>
+      <button class="btn btn-warning">Delete</button>
+    </td>
+  </tr>
+</table>

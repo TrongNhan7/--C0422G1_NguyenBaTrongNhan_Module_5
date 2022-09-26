@@ -1,0 +1,32 @@
+<table class="table table-info">
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Date of birth</th>
+    <th>Gender</th>
+    <th>Id card</th>
+    <th>Phone number</th>
+    <th>Email</th>
+    <th>Address</th>
+    <th>Customer type</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  <tr *ngFor="let customer of customers;let i = index" [attr.data-index]="i">
+    <td>{{i+1}}</td>
+    <td>{{customer.name}}</td>
+    <td>{{customer.birthday}}</td>
+    <td>{{customer.gender}}</td>
+    <td>{{customer.idCard}}</td>
+    <td>{{customer.phone}}</td>
+    <td>{{customer.email}}</td>
+    <td>{{customer.address}}</td>
+    <td>{{customer.customerType.name}}</td>
+    <td>
+      <button class="btn btn-warning">Edit</button>
+    </td>
+    <td>
+      <button class="btn btn-warning">Delete</button>
+    </td>
+  </tr>
+</table>
