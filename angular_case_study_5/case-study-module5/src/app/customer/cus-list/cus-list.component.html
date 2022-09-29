@@ -1,3 +1,5 @@
+<a [routerLink]="['/cus-list']">Home Customer</a>
+<a [routerLink]="['/cus-create']">Create Customer</a>
 <table class="table table-info">
   <tr>
     <th>#</th>
@@ -23,7 +25,7 @@
     <td>{{customer.address}}</td>
     <td>{{customer.customerType.name}}</td>
     <td>
-      <button class="btn btn-warning">Edit</button>
+      <a [routerLink]="['/cus-edit',customer.id]" >Edit</a>
     </td>
     <td>
       <button class="btn btn-warning">Delete</button>

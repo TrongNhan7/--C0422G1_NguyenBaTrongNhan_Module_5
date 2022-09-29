@@ -40,6 +40,7 @@ export class CusCreateComponent implements OnInit {
   submit() {
     this.customer = this.customerForm.value;
     this.customer.customerType = this.customerTypeService.findById(this.customerForm.value.customerType);
+    this.customer.id = this.customerService.getId();
     this.customerService.saveCustomer(this.customer);
     console.log(this.customerForm.value);
     console.log(this.customerForm.value.customerType);

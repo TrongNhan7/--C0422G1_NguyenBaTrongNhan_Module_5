@@ -9,7 +9,7 @@
 <div style="text-align: center">
   <h1>CREATE CUSTOMER</h1>
 </div>
-
+<a [routerLink]="['/cus-list']">Home Customer</a>
 <div class="container-fluid ">
   <div class="row">
     <div class="col-lg-3">
@@ -48,7 +48,7 @@
           <div class="col-md-12">
             <label for="gender" class="form-label">Gender</label>
             <select id="gender" formControlName="gender" class="form-select">
-              <option value="null"  selected>Chọn giới tính</option>
+              <option value="null" selected>Chọn giới tính</option>
               <option value='Nữ'>Nữ</option>
               <option value="Nam">Nam</option>
             </select>
@@ -58,7 +58,7 @@
             <select id="customerTypeId" formControlName="customerType" class="form-select">
               <option value="null" selected>Select Customer Type</option>
               <option *ngFor="let item of customerTypeList" [ngValue]="item.id">{{item.name}}</option>
-              </select>
+            </select>
           </div>
 
           <div class="col-12 mt-3" align="center">
