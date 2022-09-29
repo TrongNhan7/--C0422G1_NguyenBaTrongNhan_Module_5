@@ -1,0 +1,23 @@
+<form [formGroup]="loginForm" (ngSubmit)="submit()" novalidate>
+  <div class="col-md-12 ">
+    <label for="email" class="form-label">Email</label>
+    <input type="text" class="form-control" id="email" formControlName="email">
+    <div *ngIf="loginForm.controls.email.hasError('required')
+&& loginForm.controls.email.touched"><p style="color: red">Không dc để trống</p>
+    </div>
+    <div *ngIf="loginForm.controls.email.hasError('email')
+&& loginForm.controls.email.touched"><p style="color: red">Sai định dạng</p>
+    </div>
+  </div>
+  <div class="col-md-12 ">
+    <label for="password" class="form-label">Password</label>
+    <input type="text" class="form-control" id="password" formControlName="password">
+    <div *ngIf="loginForm.controls.password.hasError('required')
+&& loginForm.controls.password.touched"><p style="color: red">Không dc để trống</p>
+    </div>
+    <div *ngIf="loginForm.controls.password.hasError('minlength')
+&& loginForm.controls.password.touched"><p style="color: red">Tối thiểu 6 ký tự</p>
+    </div>
+  </div>
+  <button type="submit" [disabled]="!loginForm.valid">Submit</button>
+</form>

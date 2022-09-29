@@ -1,0 +1,66 @@
+<form [formGroup]="registerForm" (ngSubmit)="submit()" novalidate>
+
+  <div class="col-md-12 ">
+    <label for="email" class="form-label">Email</label>
+    <input type="text" class="form-control" id="email" formControlName="email">
+    <div *ngIf="registerForm.controls.email.hasError('required')"><p style="color: red">Không dc để trống</p>
+    </div>
+    <div *ngIf="registerForm.controls.email.hasError('email')"><p style="color: red">Sai định dạng</p>
+    </div>
+
+  </div>
+  <div class="col-md-12 ">
+    <label for="password" class="form-label">Password</label>
+    <input type="text" class="form-control" id="password" formControlName="password">
+    <div *ngIf="registerForm.controls.password.hasError('required')
+&& registerForm.controls.password.touched"><p style="color: red">Không dc để trống</p>
+    </div>
+    <div *ngIf="registerForm.controls.password.hasError('minlength')
+&& registerForm.controls.password.touched"><p style="color: red">Tối thiểu 6 ký tự</p>
+    </div>
+  </div>
+  <div class="col-md-12 ">
+    <label for="confirmPassword" class="form-label">Confirm Password</label>
+    <input type="text" class="form-control" id="confirmPassword" formControlName="confirmPassword">
+    <div *ngIf="registerForm.hasError('passWordNotMatch')&& (registerForm.touched|| registerForm.dirty)">
+      <p style="color: red">Mật khẩu ko trùng khớp</p>
+    </div>
+  </div>
+
+  <div class="col-md-12 ">
+    <label for="country" class="form-label">Country</label>
+    <input type="text" class="form-control" id="country" formControlName="country">
+  </div>
+  <div class="col-md-12 ">
+    <label for="age" class="form-label">Age</label>
+    <input type="date" class="form-control" id="age" formControlName="age">
+    <div *ngIf="registerForm.controls.age.hasError('ageFalse')
+&& registerForm.controls.age.touched"><p style="color: red">Phải trên 18 tuổi</p>
+    </div>
+  </div>
+
+  <div>
+    <div>
+      <input type="radio" id="huey" formControlName="gender" name="gender" value="true">
+      <label for="huey">Nam</label>
+    </div>
+    <div>
+      <input type="radio" id="dewey" formControlName="gender" name="gender" value="false">
+      <label for="dewey">Nu</label>
+    </div>
+  </div>
+
+  <div class="col-md-12 ">
+    <label for="phone" class="form-label">Phone</label>
+    <input type="text" class="form-control" id="phone" formControlName="phone">
+    <div *ngIf="registerForm.controls.phone.hasError('required')&& registerForm.controls.phone.touched">
+      <p style="color: red">Không dc để trống</p>
+    </div>
+    <div *ngIf="registerForm.controls.phone.hasError('pattern')&& registerForm.controls.phone.touched">
+      <p style="color: red">Nhập 9 đến 10 số</p>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="!registerForm.valid">Submit</button>
+</form>
+
