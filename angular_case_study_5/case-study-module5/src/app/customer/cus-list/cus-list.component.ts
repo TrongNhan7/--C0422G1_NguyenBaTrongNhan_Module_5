@@ -9,6 +9,8 @@ import {CustomerService} from '../../service/customer.service';
 })
 export class CusListComponent implements OnInit {
   customers: Customer[] = [];
+  idDelete: number;
+  nameDelete: string;
 
   constructor(private customerService: CustomerService) {
   }
@@ -19,5 +21,15 @@ export class CusListComponent implements OnInit {
 
   private getAll() {
     this.customers = this.customerService.getAllCustomer();
+  }
+
+  getIdNameDelete(id: number, name: string) {
+    this.idDelete = id;
+    this.nameDelete = name;
+  }
+
+  deleteCustomer() {
+    this.customerService.deleteById(this.idDelete);
+    alert('Xóa thành công!!!');
   }
 }

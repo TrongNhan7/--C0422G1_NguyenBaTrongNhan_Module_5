@@ -15,10 +15,10 @@
   <h5 *ngIf="facility.areaPool;else elsePool">PoolArea: {{facility.areaPool}}</h5>
   <ng-template #elsePool><h5>PoolArea: XXX </h5></ng-template>
 
-  <h5 *ngIf="facility.numberOfFloors;else elseFloors">PoolArea: {{facility.numberOfFloors}}</h5>
+  <h5 *ngIf="facility.numberOfFloors;else elseFloors">Number Floors: {{facility.numberOfFloors}}</h5>
   <ng-template #elseFloors><h5>Number Floors: XXX </h5></ng-template>
 
-  <h5 *ngIf="facility.freeService;else elseService">PoolArea: {{facility.freeService}}</h5>
+  <h5 *ngIf="facility.freeService;else elseService">Free Service: {{facility.freeService}}</h5>
   <ng-template #elseService><h5>Free Service: XXX </h5></ng-template>
 
 </div>

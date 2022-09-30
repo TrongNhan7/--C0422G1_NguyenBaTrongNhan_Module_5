@@ -1,3 +1,4 @@
+<a [routerLink]="['/fac-create']">Create Facility</a>
 <div class="row">
   <div *ngFor="let facility of facilities" class="col-lg-4">
     <div class="card ms-5" style="width: 23rem;">
@@ -8,8 +9,28 @@
         <p class="card-text">Loại dịch vụ: {{facility.facilityType.name}}</p>
         <a href="#" class="btn btn-warning" [routerLink]="['/fac-detail',facility.id]">Detail</a>
         <a href="#" class="btn btn-warning ms-2" [routerLink]="['/fac-edit',facility.id]">Edit</a>
-        <button class="btn btn-warning float-end">Delete</button>
+        <button class="btn btn-warning float-end" data-bs-toggle="modal" data-bs-target="#delete"
+                (click)="getIdNameDelete(facility.id,facility.name)">Delete</button>
       </div>
     </div>
   </div>
 </div>
+
+<div class="modal" tabindex="-1" id="delete">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có muốn xóa: {{nameDelete}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="deleteFacility()" >Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -4,7 +4,7 @@ import {Customer} from '../../model/customer';
 import {CustomerType} from '../../model/customer-type';
 import {CustomerService} from '../../service/customer.service';
 import {CustomerTypeService} from '../../service/customer-type.service';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 
 @Component({
   selector: 'app-cus-edit',
@@ -12,14 +12,14 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
   styleUrls: ['./cus-edit.component.css']
 })
 export class CusEditComponent implements OnInit {
-  idCustomer: number;
   customer: Customer | any;
   customerForm: FormGroup | any;
   customerTypeList: CustomerType[] = [];
 
   constructor(private customerService: CustomerService,
               private customerTypeService: CustomerTypeService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -45,6 +45,7 @@ export class CusEditComponent implements OnInit {
     this.customer = this.customerForm.value;
     this.customer.customerType = this.customerTypeService.findById(this.customerForm.value.customerType);
     this.customerService.editCustomer(this.customer);
+    this.router.navigateByUrl('customer/cus-list');
   }
 
 }

@@ -4,6 +4,7 @@ import {CustomerService} from '../../service/customer.service';
 import {CustomerTypeService} from '../../service/customer-type.service';
 import {CustomerType} from '../../model/customer-type';
 import {Customer} from '../../model/customer';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-cus-create',
@@ -25,7 +26,9 @@ export class CusCreateComponent implements OnInit {
   customer: Customer;
   customerTypeList: CustomerType[] = [];
 
-  constructor(private customerService: CustomerService, private customerTypeService: CustomerTypeService) {
+
+  constructor(private customerService: CustomerService, private customerTypeService: CustomerTypeService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -42,6 +45,7 @@ export class CusCreateComponent implements OnInit {
     this.customer.customerType = this.customerTypeService.findById(this.customerForm.value.customerType);
     this.customer.id = this.customerService.getId();
     this.customerService.saveCustomer(this.customer);
+    this.router.navigateByUrl('customer/cus-list');
     console.log(this.customerForm.value);
     console.log(this.customerForm.value.customerType);
     this.customerForm.reset();

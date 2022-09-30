@@ -60,14 +60,15 @@ export class CustomerService {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.customers.length; i++) {
       if (this.customers[i].id === customer.id) {
-        this.customers[i].name = customer.name;
-        this.customers[i].birthday = customer.birthday;
-        this.customers[i].gender = customer.gender;
-        this.customers[i].idCard = customer.idCard;
-        this.customers[i].phone = customer.phone;
-        this.customers[i].email = customer.email;
-        this.customers[i].customerType = customer.customerType;
-        this.customers[i].address = customer.address;
+        this.customers.splice(i, 1, customer);
+      }
+    }
+  }
+
+  deleteById(id: number) {
+    for (let i = 0; i < this.customers.length; i++) {
+      if (this.customers[i].id === id) {
+        this.customers.splice(i, 1);
       }
     }
   }

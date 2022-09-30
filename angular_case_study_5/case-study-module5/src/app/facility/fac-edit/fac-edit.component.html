@@ -1,1 +1,85 @@
-<p>fac-edit works!</p>
+<div style="text-align: center">
+  <h1>EDIT FACILITY</h1>
+</div>
+<a [routerLink]="['/fac-list']">Home Facility</a>
+<div class="container-fluid ">
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+      <form [formGroup]="facilityForm" (ngSubmit)="submit()">
+
+        <div class="col-md-12 ">
+          <label for="facilityType" class="form-label">Facility Type</label>
+          <select id="facilityType" formControlName="facilityType" class="form-select">
+            <option value="null" selected>Select Facility Type</option>
+            <ng-container *ngFor="let item of facilityType">
+              <option [ngValue]="item.id">{{item.name}}</option>
+            </ng-container>
+
+          </select>
+        </div>
+
+        <div class="col-md-12">
+          <label for="name" class="form-label">Name Facility</label>
+          <input type="text" class="form-control" formControlName="name" id="name">
+        </div>
+        <div class="col-md-12">
+          <label for="area" class="form-label">Area</label>
+          <input type="number" class="form-control" id="area" formControlName="area">
+        </div>
+
+        <div class="col-md-12">
+          <label for="cost" class="form-label">Cost</label>
+          <input type="text" class="form-control" id="cost" formControlName="cost">
+        </div>
+        <div class="col-md-12">
+          <label for="maxPeople" class="form-label">People Max</label>
+          <input type="text" class="form-control" id="maxPeople" formControlName="maxPeople">
+        </div>
+
+        <div class="col-md-12" *ngIf="showEdit==1||showEdit==2">
+          <label for="standardRoom" class="form-label">Room Standard</label>
+          <input type="text" class="form-control" id="standardRoom" formControlName="standardRoom">
+        </div>
+
+        <div class="col-md-12" *ngIf="showEdit==1||showEdit==2">
+          <label for="descriptionOtherConvenience" class="form-label">Description</label>
+          <input type="text" class="form-control" id="descriptionOtherConvenience"
+                 formControlName="descriptionOtherConvenience">
+        </div>
+
+
+        <div class="col-md-12 " *ngIf="showEdit==1">
+          <label for="areaPool" class="form-label">Pool Area</label>
+          <input type="text" class="form-control" id="areaPool" formControlName="areaPool">
+        </div>
+
+        <div class="col-md-12 " *ngIf="showEdit==1||showEdit==2">
+          <label for="numberOfFloors" class="form-label">Number of Floors</label>
+          <input type="text" class="form-control" id="numberOfFloors" formControlName="numberOfFloors">
+        </div>
+        <div class="col-md-12 " *ngIf="showEdit==3">
+          <label for="freeService" class="form-label">Free Service</label>
+          <input type="text" class="form-control" id="freeService" formControlName="freeService">
+        </div>
+
+        <div class="col-md-12 ">
+          <label for="rentType" class="form-label">Rent Type</label>
+          <select id="rentType" formControlName="rentType" class="form-select">
+            <option value="null" selected>Select Rent Type</option>
+            <option *ngFor="let item of rentType" [ngValue]="item.id">{{item.name}}</option>
+          </select>
+        </div>
+
+
+        <div class="col-12 mt-3" align="center">
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-3">
+
+    </div>
+  </div>
+</div>

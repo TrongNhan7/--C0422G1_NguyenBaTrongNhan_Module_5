@@ -90,6 +90,10 @@ export class FacilityService {
     return this.facilities;
   }
 
+  saveFacility(facility: Facility) {
+    this.facilities.push(facility);
+  }
+
   getFacilityById(id: number): Facility {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.facilities.length; i++) {
@@ -98,5 +102,37 @@ export class FacilityService {
       }
     }
     return null;
+  }
+
+  getId(): number {
+    let id = 0;
+    let max = 0;
+    if (this.facilities == null) {
+      return id = 1;
+    } else {
+      for (const facility of this.facilities) {
+        if (facility.id > max) {
+          max = facility.id;
+        }
+      }
+    }
+    return id = max + 1;
+  }
+
+  editFacility(facility: Facility): void {
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.facilities.length; i++) {
+      if (this.facilities[i].id === facility.id) {
+        this.facilities.splice(i, 1, facility);
+      }
+    }
+  }
+
+  deleteById(id: number) {
+    for (let i = 0; i < this.facilities.length; i++) {
+      if (this.facilities[i].id === id) {
+        this.facilities.splice(i, 1);
+      }
+    }
   }
 }

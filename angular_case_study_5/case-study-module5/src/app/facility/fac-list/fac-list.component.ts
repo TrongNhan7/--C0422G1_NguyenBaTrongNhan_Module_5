@@ -10,6 +10,8 @@ import {FacilityService} from '../../service/facility.service';
 })
 export class FacListComponent implements OnInit {
   facilities: Facility[] = [];
+  idDelete: number;
+  nameDelete: string;
 
   constructor(private facilityService: FacilityService) {
 
@@ -19,4 +21,13 @@ export class FacListComponent implements OnInit {
     this.facilities = this.facilityService.getAll();
   }
 
+  getIdNameDelete(id: number, name: string) {
+    this.idDelete = id;
+    this.nameDelete = name;
+  }
+
+  deleteFacility() {
+    this.facilityService.deleteById(this.idDelete);
+    alert('Delete thành công!!!');
+  }
 }
