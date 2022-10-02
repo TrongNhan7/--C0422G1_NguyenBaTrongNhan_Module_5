@@ -1,0 +1,29 @@
+
+  \{^_^}/ hi!
+
+  Loading db.json
+  Oops, db.json doesn't seem to exist
+  Creating db.json with some default data
+
+  Done
+
+  Resources
+  http://localhost:3000/posts
+  http://localhost:3000/comments
+  http://localhost:3000/profile
+
+  Home
+  http://localhost:3000
+
+  Type s + enter at any time to create a snapshot of the database
+  Watching...
+
+[0mGET /products [33m404[0m 11.057 ms - 2[0m
+[0mGET /categories [33m404[0m 3.240 ms - 2[0m
+[0mGET /products [33m404[0m 14.726 ms - 2[0m
+[0mGET /products [33m404[0m 11.521 ms - 2[0m
+[0mGET /products [33m404[0m 13.836 ms - 2[0m
+[0mGET /products [33m404[0m 15.105 ms - 2[0m
+[0mGET /products [33m404[0m 11.234 ms - 2[0m
+[0mGET /products [33m404[0m 15.636 ms - 2[0m
+[0mGET /products [33m404[0m 11.391 ms - 2[0m

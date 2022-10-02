@@ -1,0 +1,34 @@
+{
+  "products": [
+    {
+      "name": "12314234123",
+      "price": 123,
+      "description": "123",
+      "category": {
+        "id": 1,
+        "nameCategory": "điện thoại"
+      },
+      "id": 1
+    },
+    {
+      "name": "567567",
+      "price": 123,
+      "description": "123123",
+      "category": {
+        "id": 2,
+        "nameCategory": "si-lip"
+      },
+      "id": 2
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "nameCategory": "điện thoại"
+    },
+    {
+      "id": 2,
+      "nameCategory": "si-lip"
+    }
+  ]
+}
