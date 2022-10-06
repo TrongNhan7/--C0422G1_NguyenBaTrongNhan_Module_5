@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface IXeService {
 
-    Page<Xe> findAll(Pageable pageable);
+    Page<Xe> findAll(String keyword, Pageable pageable);
 
     void createXe(Xe xe);
 

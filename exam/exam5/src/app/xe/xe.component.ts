@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Xe} from "../model/xe";
-import {NhaXe} from "../model/nha-xe";
-import {XeService} from "../service/xe.service";
-import {NhaXeService} from "../service/nha-xe.service";
-import Swal from  'sweetalert2';
+import {Xe} from '../model/xe';
+import {NhaXe} from '../model/nha-xe';
+import {XeService} from '../service/xe.service';
+import {NhaXeService} from '../service/nha-xe.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-xe',
@@ -15,6 +15,7 @@ export class XeComponent implements OnInit {
   nhaXeList: NhaXe[] = [];
   bienSoXe: string;
   idDelete: number;
+  keyword = '';
 
   constructor(private xeService: XeService, private nhaXeService: NhaXeService) {
   }
@@ -25,9 +26,9 @@ export class XeComponent implements OnInit {
   }
 
   private getAllXe() {
-    this.xeService.getAll().subscribe(xe => {
+    this.xeService.getAll(this.keyword).subscribe(xe => {
       this.xeList = xe.content;
-    })
+    });
     console.log(this.xeList);
   }
 
@@ -36,6 +37,7 @@ export class XeComponent implements OnInit {
   //     this.nhaXeList = nhaXe;
   //   })
   // }
+
 
   getDelete(id: number, bienSoXe: string) {
     this.idDelete = id;
@@ -46,7 +48,19 @@ export class XeComponent implements OnInit {
     this.xeService.delete(this.idDelete).subscribe(next => {
       console.log(this.idDelete);
       this.getAllXe();
-      Swal.fire('Xóa thành công!!!')
+      Swal.fire('Xóa thành công!!!');
     });
+  }
+
+  search() {
+    if (this.keyword == null) {
+      return this.xeList;
+    } else {
+      this.xeService.getAll(this.keyword).subscribe(xe => {
+        this.xeList = xe.content;
+      });
+    }
+    console.log(this.keyword);
+    this.keyword = '';
   }
 }

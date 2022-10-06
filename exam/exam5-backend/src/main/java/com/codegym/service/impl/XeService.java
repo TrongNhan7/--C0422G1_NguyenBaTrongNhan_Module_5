@@ -14,8 +14,8 @@ public class XeService implements IXeService {
     private IXeRepository iXeRepository;
 
     @Override
-    public Page<Xe> findAll(Pageable pageable) {
-        return iXeRepository.findAllXe(pageable);
+    public Page<Xe> findAll(String keyword, Pageable pageable) {
+        return iXeRepository.findAllXe(keyword, pageable);
     }
 
     @Override

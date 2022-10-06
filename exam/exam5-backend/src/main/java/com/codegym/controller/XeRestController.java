@@ -24,8 +24,8 @@ public class XeRestController {
     private INhaXeService iNhaXeService;
 
     @GetMapping("")
-    public ResponseEntity<Page<Xe>> findAllXe(Pageable pageable) {
-        Page<Xe> xePage = this.iXeService.findAll(pageable);
+    public ResponseEntity<Page<Xe>> findAllXe(@RequestParam(defaultValue = "") String keyword, Pageable pageable) {
+        Page<Xe> xePage = this.iXeService.findAll(keyword, pageable);
         if (!xePage.hasContent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {

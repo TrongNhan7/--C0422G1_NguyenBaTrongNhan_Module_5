@@ -12,8 +12,8 @@ export class XeService {
   constructor(private http: HttpClient) {
   }
 
-  getAll(): Observable<any> {
-    return this.http.get(this.URL_XE);
+  getAll(keyword: string): Observable<any> {
+    return this.http.get(this.URL_XE + '?keyword=' + keyword);
   }
 
   update(xe: Xe): Observable<Xe> {
@@ -31,4 +31,6 @@ export class XeService {
   findById(id: number): Observable<Xe> {
     return this.http.get<Xe>(this.URL_XE + '/' + id);
   }
+
+
 }

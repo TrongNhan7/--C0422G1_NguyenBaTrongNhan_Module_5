@@ -14,9 +14,9 @@ import java.util.Optional;
 
 public interface IXeRepository extends JpaRepository<Xe, Integer> {
 
-    @Query(value = "select * from xe", nativeQuery = true,
-            countQuery = "select count(*) from (select * from xe) xe")
-    Page<Xe> findAllXe(Pageable pageable);
+    @Query(value = "select * from xe where xe.bien_so_xe like concat('%',:keyword,'%')", nativeQuery = true,
+            countQuery = "select count(*) from (select * from xe where xe.bien_so_xe like concat('%',:keyword,'%')) xe")
+    Page<Xe> findAllXe(@Param("keyword") String keyword,Pageable pageable);
 
     @Query(value = "select * from xe where xe.id=:id", nativeQuery = true)
     Optional<Xe> findById(@Param("id") Integer id);
@@ -32,5 +32,6 @@ public interface IXeRepository extends JpaRepository<Xe, Integer> {
     @Query(value = "insert into xe(xe.bien_so_xe,xe.diem_di,xe.diem_den,xe.gio_di,xe.gio_den,xe.loai_xe,xe.nha_xe_id)" +
             " values (?1,?2,?3,?4,?5,?6,?7)", nativeQuery = true)
     void createXe(String bienSoXe, String diemDi, String diemDen, String gioDi, String gioDen, String loaiXe, Integer nhaXeId);
+
 
 }
