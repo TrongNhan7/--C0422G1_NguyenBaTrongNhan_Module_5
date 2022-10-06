@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {CustomerService} from '../../service/customer.service';
 import {CustomerTypeService} from '../../service/customer-type.service';
 import {CustomerType} from '../../model/customer-type';
@@ -14,14 +14,14 @@ import {Router} from '@angular/router';
 export class CusCreateComponent implements OnInit {
   customerForm: FormGroup = new FormGroup({
     id: new FormControl(),
-    name: new FormControl(),
-    birthday: new FormControl(),
-    gender: new FormControl(),
-    idCard: new FormControl(),
-    phone: new FormControl(),
-    email: new FormControl(),
-    customerType: new FormControl(),
-    address: new FormControl()
+    customerName: new FormControl('', [Validators.required, Validators.pattern('^[A-Z][a-zA-Z]*(\\s[A-Z][a-zA-Z]*)*$')]),
+    birthday: new FormControl('', [Validators.required, this.regexBirthday]),
+    gender: new FormControl('', [Validators.required]),
+    idCard: new FormControl('', [Validators.pattern('^[0-9]{9,11}$')]),
+    phone: new FormControl('', this.phoneValidator),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    customerType: new FormControl('', [Validators.required]),
+    address: new FormControl('', [Validators.required])
   });
   customer: Customer;
   customerTypeList: CustomerType[] = [];
@@ -49,5 +49,28 @@ export class CusCreateComponent implements OnInit {
     console.log(this.customerForm.value);
     console.log(this.customerForm.value.customerType);
     this.customerForm.reset();
+  }
+
+  regexBirthday(control: AbstractControl): ValidationErrors | null {
+    const valueDay = control.value;
+    const current = new Date().getFullYear();
+    const birthday = new Date(valueDay).getFullYear();
+    const age = current - birthday;
+    if (isNaN(age)) {
+      return {ageFalse: true};
+    }
+    if (age < 18) {
+      return {ageFalse: true};
+    }
+    return null;
+  }
+
+  phoneValidator(control: AbstractControl) {
+    const phoneRegex = new RegExp('^(090|091)[0-9]{7}$');
+    if (phoneRegex.test(control.value)) {
+      return null;
+    } else {
+      return {phoneValidator: true};
+    }
   }
 }

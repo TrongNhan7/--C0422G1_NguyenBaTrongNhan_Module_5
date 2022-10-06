@@ -1,0 +1,67 @@
+<h1 style="text-align: center">Danh sách các xe đăng ký đến bến xe XYZ</h1>
+
+  <div class="col-4">
+    <button class="btn btn-warning" routerLink="/create">Tạo mới</button>
+  </div>
+
+  <table class="table table-warning">
+    <thead>
+    <tr>
+      <th>STT</th>
+      <td>Số xe</td>
+      <td>Loai xe</td>
+      <td>Tên nhà xe</td>
+      <td>Điểm đi</td>
+      <td>Điểm đến</td>
+      <td>Số điện thoại</td>
+      <td>Email</td>
+      <td>Giờ đi</td>
+      <td>Giờ đến</td>
+      <td colspan="2">Action</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let xe of xeList; index as i">
+      <td>{{i + 1}}</td>
+      <td>{{xe.bienSoXe}}</td>
+      <td>{{xe.loaiXe}}</td>
+      <td>{{xe.nhaXe.tenNhaXe}}</td>
+      <td>{{xe.diemDi}}</td>
+      <td>{{xe.diemDen}}</td>
+      <td>{{xe.nhaXe.sdt}}</td>
+      <td>{{xe.nhaXe.email}}</td>
+      <td>{{xe.gioDi}}</td>
+      <td>{{xe.gioDen}}</td>
+      <td>
+        <button class="btn btn-warning">
+          <a [routerLink]="['/edit',xe.id]">Edit</a>
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#delete"
+                (click)="getDelete(xe.id,xe.bienSoXe)">Delete
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+
+<div class="modal" tabindex="-1" id="delete">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Xác nhận</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có xóa xe khách có số xe: {{bienSoXe}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
+        <button type="button" class="btn btn-primary" (click)="delete()" data-bs-dismiss="modal">Có</button>
+      </div>
+    </div>
+  </div>
+</div>
+

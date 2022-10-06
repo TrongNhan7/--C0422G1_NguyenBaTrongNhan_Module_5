@@ -1,6 +1,21 @@
 <h1>Danh sách sản phẩm</h1>
-<a routerLink="/create">Tạo mới sản phẩm</a>
-<table>
+<div class="row">
+  <div class="col-4">
+    <button class="btn btn-warning" routerLink="/create">Tạo mới sản phẩm</button>
+  </div>
+  <div class="col-4">
+    <select id="category" class="form-select"  (change)="getIdSearch($event)">
+      <option value="" selected>Chọn danh mục sản phẩm</option>
+      <option *ngFor="let category of categories" >{{category.nameCategory}}</option>
+    </select>
+  </div>
+  <div class="col-4">
+    <input type="text" [(ngModel)]="keyword" name="keyword">
+    <button (click)="search()">Tìm</button>
+    <button (click)="back()">Quay lại</button>
+  </div>
+</div>
+<table class="table table-warning">
   <tr>
     <td>STT</td>
     <td>Tên</td>
@@ -9,13 +24,17 @@
     <td>Thể loại</td>
     <td colspan="2"></td>
   </tr>
-  <tr *ngFor="let product of products; index as i">
+  <tr *ngFor="let product of products| paginate: { itemsPerPage: 3, currentPage: p }; index as i">
     <td>{{i + 1}}</td>
     <td>{{product.name}}</td>
     <td>{{product.price}}</td>
     <td>{{product.description}}</td>
     <td>{{product.category.nameCategory}}</td>
-    <td><a [routerLink]="['/edit',product.id]">Edit</a></td>
+    <td>
+      <button class="btn btn-warning">
+        <a [routerLink]="['/edit',product.id]">Edit</a>
+      </button>
+    </td>
     <td>
       <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#delete"
               (click)="getIdNameDelete(product.id,product.name)">Delete
@@ -23,6 +42,7 @@
     </td>
   </tr>
 </table>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
 
 
 <div class="modal" tabindex="-1" id="delete">

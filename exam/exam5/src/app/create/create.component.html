@@ -1,0 +1,71 @@
+<div class="container" style="width: 900px">
+  <h1 style="text-align: center">Sửa phẩm mới</h1>
+  <form [formGroup]="xeForm" (ngSubmit)="submit()" novalidate>
+    <div class="col-md-12 ">
+      <label for="bienSoXe" class="form-label">Biển số xe</label>
+      <input type="text" class="form-control" id="bienSoXe" formControlName="bienSoXe">
+      <div *ngIf="xeForm.controls.bienSoXe.hasError('required')
+ && xeForm.controls.bienSoXe.touched"><p style="color: red">Không dc để trống</p>
+      </div>
+    </div>
+
+    <div class="col-md-12 ">
+      <label for="loaiXe" class="form-label">Loại xe</label>
+      <input type="text" class="form-control" id="loaiXe" formControlName="loaiXe">
+      <div *ngIf="xeForm.controls.loaiXe.hasError('required')
+ && xeForm.controls.loaiXe.touched"><p style="color: red">Không dc để trống</p>
+      </div>
+    </div>
+
+    <div class="col-md-12 ">
+      <label for="diemDi" class="form-label">Điểm đi</label>
+      <select id="diemDi" formControlName="diemDi" class="form-select">
+        <option value="" selected>Chọn điểm đi</option>
+        <option *ngFor="let diemDi of diaDiem" [ngValue]="diemDi.local">{{diemDi.local}}</option>
+      </select>
+      <div *ngIf="xeForm.controls.diemDi.hasError('required')
+ && xeForm.controls.diemDi.touched"><p style="color: red">Không dc để trống</p>
+      </div>
+    </div>
+
+    <div class="col-md-12 ">
+      <label for="diemDen" class="form-label">Điểm đến</label>
+      <select id="diemDen" formControlName="diemDen" class="form-select">
+        <option value="" selected>Chọn điểm đến</option>
+        <option *ngFor="let diemDen of diaDiem" [ngValue]="diemDen.local">{{diemDen.local}}</option>
+      </select>
+      <div *ngIf="xeForm.controls.diemDen.hasError('required')
+ && xeForm.controls.diemDen.touched"><p style="color: red">Không dc để trống</p>
+      </div>
+    </div>
+
+
+    <div class="col-md-12 ">
+      <label for="nhaXe" class="form-label">Nhà Xe</label>
+      <select id="nhaXe" formControlName="nhaXe" class="form-select">
+        <option value="" selected>Chọn nhà xe</option>
+        <option *ngFor="let nhaXe of nhaXe" [ngValue]="nhaXe.id">{{nhaXe.tenNhaXe}}</option>
+      </select>
+
+    </div>
+
+    <div class="col-md-12 ">
+      <label for="gioDi" class="form-label">Giờ đi</label>
+      <input type="text" class="form-control" id="gioDi" formControlName="gioDi">
+      <div *ngIf="xeForm.controls.gioDi.hasError('required')
+ && xeForm.controls.gioDi.touched"><p style="color: red">Không dc để trống</p>
+      </div>
+    </div>
+
+    <div class="col-md-12 ">
+      <label for="gioDen" class="form-label">Giờ đến</label>
+      <input type="text" class="form-control" id="gioDen" formControlName="gioDen">
+      <div *ngIf="xeForm.controls.gioDen.hasError('required')
+ && xeForm.controls.gioDen.touched"><p style="color: red">Không dc để trống</p>
+      </div>
+    </div>
+    <button type="submit" [disabled]="!xeForm.valid">Submit</button>
+
+  </form>
+</div>
+

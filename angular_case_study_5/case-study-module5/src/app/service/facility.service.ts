@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Facility} from '../model/facility';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,7 @@ export class FacilityService {
   facilities: Facility[] = [
     {
       id: 1,
-      name: 'Villa super Vip I',
+      nameService: 'Villa super Vip I',
       area: 200,
       cost: 10,
       maxPeople: 5,
@@ -21,7 +23,7 @@ export class FacilityService {
     },
     {
       id: 2,
-      name: 'Villa super Vip II',
+      nameService: 'Villa super Vip II',
       area: 500,
       cost: 20,
       maxPeople: 10,
@@ -34,7 +36,7 @@ export class FacilityService {
     },
     {
       id: 3,
-      name: 'Villa super Vip III',
+      nameService: 'Villa super Vip III',
       area: 700,
       cost: 50,
       maxPeople: 7,
@@ -47,7 +49,7 @@ export class FacilityService {
     },
     {
       id: 4,
-      name: 'House royal I',
+      nameService: 'House royal I',
       area: 700,
       cost: 50,
       maxPeople: 7,
@@ -59,7 +61,7 @@ export class FacilityService {
     },
     {
       id: 5,
-      name: 'House royal II',
+      nameService: 'House royal II',
       area: 700,
       cost: 50,
       maxPeople: 7,
@@ -71,7 +73,7 @@ export class FacilityService {
     },
     {
       id: 6,
-      name: 'Room super super Vip Pro I',
+      nameService: 'Room super super Vip Pro I',
       area: 700,
       cost: 50,
       maxPeople: 7,
@@ -83,7 +85,15 @@ export class FacilityService {
 
   ];
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
+  }
+
+  getAllFacility(): Observable<any> {
+    return this.httpClient.get('http://localhost:8080/facilityRest');
+  }
+
+  findByIdRest(id: number): Observable<any> {
+    return this.httpClient.get('http://localhost:8080/facilityRest/' + id);
   }
 
   getAll() {
@@ -91,7 +101,15 @@ export class FacilityService {
   }
 
   saveFacility(facility: Facility) {
-    this.facilities.push(facility);
+    return this.httpClient.post('http://localhost:8080/facilityRest', facility);
+  }
+
+  getAllFacilityType(): Observable<any> {
+    return this.httpClient.get('http://localhost:8080/facility/facilityType');
+  }
+
+  getAllRentType(): Observable<any> {
+    return this.httpClient.get('http://localhost:8080/facility/rentType');
   }
 
   getFacilityById(id: number): Facility {

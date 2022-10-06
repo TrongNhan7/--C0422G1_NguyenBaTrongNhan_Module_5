@@ -16,7 +16,10 @@ export class FacDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
-      this.facility = this.facilityService.getFacilityById(Number(paramMap.get('id')));
+      this.facilityService.findByIdRest(+paramMap.get('id')).subscribe(facility => {
+        this.facility = facility;
+        console.log(this.facility);
+      });
     });
   }
 }

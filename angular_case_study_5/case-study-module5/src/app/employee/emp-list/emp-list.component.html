@@ -1,1 +1,94 @@
-<p>emp-list works!</p>
+<!--<div style="background-image: url('https://image.winudf.com/v2/image/YXJ3YS5nb2xkLmhkLndhbGxwYXBlcl9zY3JlZW5fMl8xNTI1MjU4MzMzXzAwMg/screen-2.jpg?fakeurl=1&type=.webp')">-->
+  <div class="row mt-4">
+    <div class="col-4">
+      <button class="btn btn-warning" routerLink="/employee/emp-create">Create Employee</button>
+    </div>
+    <div class="col-4">
+      <div class="row">
+        <div class="col-4">
+          <select class="form-select" (change)="getIdPositionSearch($event)">
+            <option value="" selected>Chọn vị trí</option>
+            <option *ngFor="let item of positions">{{item.name}}</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <select class="form-select" (change)="getIdEducationSearch($event)">
+            <option value="" selected>Chọn học vấn</option>
+            <option *ngFor="let item of educations">{{item.name}}</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <select class="form-select" (change)="getIdDivisionSearch($event)">
+            <option value="" selected>Chọn phòng ban</option>
+            <option *ngFor="let item of divisions">{{item.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <input type="text" [(ngModel)]="keyword" name="keyword" style="height: 37px">
+      <button (click)="searchInput()" class="btn btn-warning ms-1 mb-2">Tìm</button>
+      <button (click)="back()" class="btn btn-warning ms-3 mb-2">Quay lại</button>
+    </div>
+  </div>
+  <table class="table " style="background: rgba(255,255,255,0.3)">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Date of birth</th>
+      <th>Id card</th>
+      <th>Salary</th>
+      <th>Phone number</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Position</th>
+      <th>Education</th>
+      <th>Division</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let employee of employees;index as i">
+      <td>{{i + 1}}</td>
+      <td>{{employee.name}}</td>
+      <td>{{employee.birthday}}</td>
+      <td>{{employee.idCard}}</td>
+      <td>{{employee.salary}}</td>
+      <td>{{employee.phoneNumber}}</td>
+      <td>{{employee.email}}</td>
+      <td>{{employee.address}}</td>
+      <td>{{employee.positionEmployee.name}}</td>
+      <td>{{employee.education.name}}</td>
+      <td>{{employee.division.name}}</td>
+      <td>
+        <a [routerLink]="['/emp-edit',employee.id]">Edit</a>
+      </td>
+      <td>
+        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#delete"
+                (click)="getIdNameDelete(employee.id,employee.name)">Delete
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="modal" tabindex="-1" id="delete">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Xóa nhân viên</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Bạn có muốn xóa: {{nameDelete}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="delete()" data-bs-dismiss="modal">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--</div>-->

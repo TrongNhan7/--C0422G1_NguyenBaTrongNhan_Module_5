@@ -1,0 +1,86 @@
+<div class="container" style="width: 900px">
+  <h1 style="text-align: center">Sửa phẩm mới</h1>
+  <form [formGroup]="xeForm" (ngSubmit)="update()" novalidate>
+    <div class="col-md-12 ">
+      <label for="bienSoXe" class="form-label">Biển số xe</label>
+      <input type="text" class="form-control" id="bienSoXe" formControlName="bienSoXe" readonly>
+      <div *ngIf="xeForm.controls.bienSoXe.hasError('required')
+ && xeForm.controls.bienSoXe.touched"><p style="color: red">Không dc để trống</p>
+      </div>
+    </div>
+
+    <div class="col-md-12 ">
+      <label for="loaiXe" class="form-label">Loại xe</label>
+      <input type="text" class="form-control" id="loaiXe" formControlName="loaiXe">
+      <div *ngIf="xeForm.controls.loaiXe.hasError('required')
+ && xeForm.controls.loaiXe.touched"><p style="color: red">Không dc để trống</p>
+      </div>
+    </div>
+
+    <div class="col-md-12 ">
+      <label for="di" class="form-label">Điểm đi</label>
+      <input type="text" class="form-control" id="di" formControlName="diemDi">
+      <div *ngIf="xeForm.controls.diemDi.hasError('required')
+ && xeForm.controls.diemDi.touched"><p style="color: red">Không dc để trống</p>
+      </div>
+    </div>
+
+    <div class="col-md-12 ">
+      <label for="den" class="form-label">Điểm đến</label>
+      <input type="text" class="form-control" id="den" formControlName="diemDen">
+      <div *ngIf="xeForm.controls.diemDen.hasError('required')
+ && xeForm.controls.diemDen.touched"><p style="color: red">Không dc để trống</p>
+      </div>
+    </div>
+
+    <div class="col-md-12 " formGroupName="nhaXe">
+      <label for="tenNhaXe" class="form-label">Tên nhà xe</label>
+      <input type="text" class="form-control" id="tenNhaXe" formControlName="tenNhaXe">
+      <div *ngIf="xeForm.get('nhaXe.tenNhaXe').hasError('required')
+          && xeForm.get('nhaXe.tenNhaXe').touched">
+        <p style="color: red">Không dc để trống</p>
+      </div>
+    </div>
+
+    <div class="col-md-12 " formGroupName="nhaXe">
+      <label for="sdt" class="form-label">Số điện thoại</label>
+      <input type="text" class="form-control" id="sdt" formControlName="sdt">
+      <div *ngIf="xeForm.get('nhaXe.sdt').hasError('required')
+          && xeForm.get('nhaXe.sdt').touched">
+        <p style="color: red">Không dc để trống</p>
+      </div>
+    </div>
+
+    <div class="col-md-12 " formGroupName="nhaXe">
+      <label for="email" class="form-label">Email</label>
+      <input type="text" class="form-control" id="email" formControlName="email">
+      <div *ngIf="xeForm.get('nhaXe.email').hasError('required')
+          && xeForm.get('nhaXe.email').touched">
+        <p style="color: red">Không dc để trống</p>
+      </div>
+      <div *ngIf="xeForm.get('nhaXe.email').hasError('email')
+          && xeForm.get('nhaXe.email').touched">
+        <p style="color: red">Sai định dạng</p>
+      </div>
+    </div>
+
+    <div class="col-md-12 ">
+      <label for="gioDi" class="form-label">Giờ đi</label>
+      <input type="text" class="form-control" id="gioDi" formControlName="gioDi">
+      <div *ngIf="xeForm.controls.gioDi.hasError('required')
+ && xeForm.controls.gioDi.touched"><p style="color: red">Không dc để trống</p>
+      </div>
+    </div>
+
+    <div class="col-md-12 ">
+      <label for="gioDen" class="form-label">Giờ đến</label>
+      <input type="text" class="form-control" id="gioDen" formControlName="gioDen">
+      <div *ngIf="xeForm.controls.gioDen.hasError('required')
+ && xeForm.controls.gioDen.touched"><p style="color: red">Không dc để trống</p>
+      </div>
+    </div>
+    <button type="submit" [disabled]="!xeForm.valid">Submit</button>
+
+  </form>
+</div>
+

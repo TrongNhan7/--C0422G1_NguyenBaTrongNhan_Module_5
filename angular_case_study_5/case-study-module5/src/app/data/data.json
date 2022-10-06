@@ -1,0 +1,88 @@
+{
+  "employees": [
+    {
+      "name": "Tuan",
+      "birthday": "1995-10-05",
+      "idCard": "12312398980",
+      "salary": "123",
+      "phoneNumber": "0905872269",
+      "email": "giothoitb7@yahoo.com",
+      "address": "K69/8 Lý Thái Tổ ",
+      "positionEmployee": {
+        "id": 1,
+        "name": "Lễ tân"
+      },
+      "education": {
+        "id": 2,
+        "name": "Cao đẳng"
+      },
+      "division": {
+        "id": 3,
+        "name": "Phục vụ"
+      },
+      "id": 1
+    }
+  ],
+  "positionEmployees": [
+    {
+      "id": 1,
+      "name": "Lễ tân"
+    },
+    {
+      "id": 2,
+      "name": "Phục vụ"
+    },
+    {
+      "id": 3,
+      "name": "Chuyên viên"
+    },
+    {
+      "id": 4,
+      "name": "Giám sát"
+    },
+    {
+      "id": 5,
+      "name": "Quản lý"
+    },
+    {
+      "id": 6,
+      "name": "Giám đốc"
+    }
+  ],
+  "educations": [
+    {
+      "id": 1,
+      "name": "Trung cấp"
+    },
+    {
+      "id": 2,
+      "name": "Cao đẳng"
+    },
+    {
+      "id": 3,
+      "name": "Đại học"
+    },
+    {
+      "id": 4,
+      "name": "Sau đại học"
+    }
+  ],
+  "division": [
+    {
+      "id": 1,
+      "name": "Sale-Marketing"
+    },
+    {
+      "id": 2,
+      "name": "Hành chính"
+    },
+    {
+      "id": 3,
+      "name": "Phục vụ"
+    },
+    {
+      "id": 4,
+      "name": "Quản lý"
+    }
+  ]
+}

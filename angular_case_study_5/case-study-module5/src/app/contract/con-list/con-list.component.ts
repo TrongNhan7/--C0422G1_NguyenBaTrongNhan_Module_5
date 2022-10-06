@@ -16,7 +16,7 @@ export class ConListComponent implements OnInit {
       total: 2000,
       customer: {
         id: 1,
-        name: 'Hùng hay kẻ',
+        customerName: 'Hùng hay kẻ',
         birthday: '12/10/2001',
         gender: 'Nam',
         idCard: '6969696969',
@@ -27,7 +27,7 @@ export class ConListComponent implements OnInit {
       },
       facility: {
         id: 1,
-        name: 'Villa super Vip I',
+        nameService: 'Villa super Vip I',
         area: 200,
         cost: 10,
         maxPeople: 5,

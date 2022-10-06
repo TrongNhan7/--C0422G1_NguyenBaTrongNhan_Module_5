@@ -16,7 +16,7 @@
   </tr>
   <tr *ngFor="let customer of customers;let i = index" [attr.data-index]="i">
     <td>{{i + 1}}</td>
-    <td>{{customer.name}}</td>
+    <td>{{customer.customerName}}</td>
     <td>{{customer.birthday}}</td>
     <td>{{customer.gender}}</td>
     <td>{{customer.idCard}}</td>
@@ -29,7 +29,7 @@
     </td>
     <td>
       <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#delete"
-              (click)="getIdNameDelete(customer.id,customer.name)">Delete
+              (click)="getIdNameDelete(customer.id,customer.customerName)">Delete
       </button>
     </td>
   </tr>

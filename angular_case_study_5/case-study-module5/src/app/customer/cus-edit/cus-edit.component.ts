@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {Customer} from '../../model/customer';
 import {CustomerType} from '../../model/customer-type';
 import {CustomerService} from '../../service/customer.service';
@@ -12,40 +12,68 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
   styleUrls: ['./cus-edit.component.css']
 })
 export class CusEditComponent implements OnInit {
-  customer: Customer | any;
   customerForm: FormGroup | any;
   customerTypeList: CustomerType[] = [];
+  customerEdit: Customer;
+  id: number;
 
   constructor(private customerService: CustomerService,
               private customerTypeService: CustomerTypeService,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
+    this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+      this.id = +paramMap.get('id');
+    });
   }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
-      this.customer = this.customerService.findById(Number(paramMap.get('id')));
-    });
     this.customerTypeList = this.customerTypeService.getAll();
     this.customerForm = new FormGroup({
-      id: new FormControl(this.customer.id),
-      name: new FormControl(this.customer.name),
-      birthday: new FormControl(this.customer.birthday),
-      gender: new FormControl(this.customer.gender),
-      idCard: new FormControl(this.customer.idCard),
-      phone: new FormControl(this.customer.phone),
-      email: new FormControl(this.customer.email),
-      customerType: new FormControl(this.customer.customerType.id),
-      address: new FormControl(this.customer.address)
+      customerName: new FormControl('', [Validators.required, Validators.pattern('^[A-Z][a-zA-Z]*(\\s[A-Z][a-zA-Z]*)*$')]),
+      birthday: new FormControl('', [Validators.required, this.regexBirthday]),
+      gender: new FormControl('', [Validators.required]),
+      idCard: new FormControl('', [Validators.pattern('^[0-9]{9,11}$')]),
+      phone: new FormControl('', this.phoneValidator),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      customerType: new FormControl('', [Validators.required]),
+      address: new FormControl('', [Validators.required])
     });
-    console.log(this.customerForm.value);
+    this.customerEdit = this.customerService.findById(this.id);
+    console.log(this.customerEdit);
+    this.customerForm.patchValue(this.customerEdit);
+    this.customerForm.patchValue({customerType: this.customerEdit.customerType.id});
+    console.log(this.customerEdit);
+
   }
 
-  submitEdit() {
-    this.customer = this.customerForm.value;
-    this.customer.customerType = this.customerTypeService.findById(this.customerForm.value.customerType);
-    this.customerService.editCustomer(this.customer);
+  submitEdit(id: number) {
+    this.customerEdit = this.customerForm.value;
+    this.customerEdit.customerType = this.customerTypeService.findById(this.customerForm.value.customerType);
+    this.customerEdit.id = this.id;
+    this.customerService.editCustomer(this.customerEdit);
     this.router.navigateByUrl('customer/cus-list');
   }
 
+  regexBirthday(control: AbstractControl): ValidationErrors | null {
+    const valueDay = control.value;
+    const current = new Date().getFullYear();
+    const birthday = new Date(valueDay).getFullYear();
+    const age = current - birthday;
+    if (isNaN(age)) {
+      return {ageFalse: true};
+    }
+    if (age < 18) {
+      return {ageFalse: true};
+    }
+    return null;
+  }
+
+  phoneValidator(control: AbstractControl) {
+    const phoneRegex = new RegExp('^(090|091)[0-9]{7}$');
+    if (phoneRegex.test(control.value)) {
+      return null;
+    } else {
+      return {phoneValidator: true};
+    }
+  }
 }

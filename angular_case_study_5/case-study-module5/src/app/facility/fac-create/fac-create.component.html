@@ -13,69 +13,140 @@
           <label for="facilityType" class="form-label">Facility Type</label>
           <select id="facilityType" formControlName="facilityType" class="form-select"
                   (change)="changeFacilityType($event)">
-            <option value="null" selected>Select Facility Type</option>
+            <option value="" selected>Select Facility Type</option>
             <ng-container *ngFor="let item of facilityType">
               <option [ngValue]="item.id">{{item.name}}</option>
             </ng-container>
-
           </select>
+          <div *ngIf="facilityForm.controls.facilityType.hasError('required')
+                && facilityForm.controls.facilityType.touched">
+            <p style="color: red">Không dc để trống</p>
+          </div>
         </div>
 
         <div class="col-md-12">
           <label for="name" class="form-label">Name Facility</label>
-          <input type="text" class="form-control" formControlName="name" id="name">
+          <input type="text" class="form-control" formControlName="nameService" id="name">
+          <div *ngIf="facilityForm.controls.nameService.hasError('required')
+                && facilityForm.controls.nameService.touched">
+            <p style="color: red">Không dc để trống</p>
+          </div>
+          <div *ngIf="facilityForm.controls.nameService.hasError('pattern')
+                && facilityForm.controls.nameService.touched">
+            <p style="color: red">Sai định dạng</p>
+          </div>
         </div>
+
         <div class="col-md-12">
           <label for="area" class="form-label">Area</label>
-          <input type="date" class="form-control" id="area" formControlName="area">
+          <input type="number" class="form-control" id="area" formControlName="area">
+          <div *ngIf="facilityForm.controls.area.hasError('required')
+                && facilityForm.controls.area.touched">
+            <p style="color: red">Không dc để trống</p>
+          </div>
+          <div *ngIf="facilityForm.controls.area.hasError('doubleValidator')
+                && facilityForm.controls.area.touched">
+            <p style="color: red">Nhập lớn hơn 0 nha!!!</p>
+          </div>
         </div>
 
         <div class="col-md-12">
           <label for="cost" class="form-label">Cost</label>
           <input type="text" class="form-control" id="cost" formControlName="cost">
+          <div *ngIf="facilityForm.controls.cost.hasError('required')
+                && facilityForm.controls.cost.touched">
+            <p style="color: red">Không dc để trống</p>
+          </div>
+          <div *ngIf="facilityForm.controls.cost.hasError('doubleValidator')
+                && facilityForm.controls.cost.touched">
+            <p style="color: red">Nhập lớn hơn 0 nha!!! </p>
+          </div>
         </div>
+
         <div class="col-md-12">
           <label for="maxPeople" class="form-label">People Max</label>
           <input type="text" class="form-control" id="maxPeople" formControlName="maxPeople">
+          <div *ngIf="facilityForm.controls.maxPeople.hasError('required')
+                && facilityForm.controls.maxPeople.touched">
+            <p style="color: red">Không dc để trống</p>
+          </div>
+          <div *ngIf="facilityForm.controls.maxPeople.hasError('pattern')
+                && facilityForm.controls.maxPeople.touched">
+            <p style="color: red">Nhập lớn hơn 0 nha!!! </p>
+          </div>
         </div>
 
         <div class="col-md-12" *ngIf="showCreate==1||showCreate==2">
           <label for="standardRoom" class="form-label">Room Standard</label>
           <input type="text" class="form-control" id="standardRoom" formControlName="standardRoom">
+          <div *ngIf="facilityForm.controls.standardRoom.hasError('required')
+                && facilityForm.controls.standardRoom.touched">
+            <p style="color: red">Không dc để trống</p>
+          </div>
         </div>
 
         <div class="col-md-12" *ngIf="showCreate==1||showCreate==2">
           <label for="descriptionOtherConvenience" class="form-label">Description</label>
           <input type="text" class="form-control" id="descriptionOtherConvenience"
                  formControlName="descriptionOtherConvenience">
+          <div *ngIf="facilityForm.controls.descriptionOtherConvenience.hasError('required')
+                && facilityForm.controls.descriptionOtherConvenience.touched">
+            <p style="color: red">Không dc để trống</p>
+          </div>
         </div>
 
 
         <div class="col-md-12 " *ngIf="showCreate==1">
           <label for="areaPool" class="form-label">Pool Area</label>
           <input type="text" class="form-control" id="areaPool" formControlName="areaPool">
+          <div *ngIf="facilityForm.controls.areaPool.hasError('required')
+                && facilityForm.controls.areaPool.touched">
+            <p style="color: red">Không dc để trống</p>
+          </div>
+          <div *ngIf="facilityForm.controls.areaPool.hasError('doubleValidator')
+                && facilityForm.controls.areaPool.touched">
+            <p style="color: red">Nhập lớn hơn 0 nha!!! </p>
+          </div>
         </div>
 
         <div class="col-md-12 " *ngIf="showCreate==1||showCreate==2">
           <label for="numberOfFloors" class="form-label">Number of Floors</label>
           <input type="text" class="form-control" id="numberOfFloors" formControlName="numberOfFloors">
+          <div *ngIf="facilityForm.controls.numberOfFloors.hasError('required')
+                && facilityForm.controls.numberOfFloors.touched">
+            <p style="color: red">Không dc để trống</p>
+          </div>
+          <div *ngIf="facilityForm.controls.numberOfFloors.hasError('pattern')
+                && facilityForm.controls.numberOfFloors.touched">
+            <p style="color: red">Nhập lớn hơn 0 nha!!! </p>
+          </div>
         </div>
-        <div class="col-md-12 " *ngIf="showCreate==3">
+
+        <div class="col-md-12 "  *ngIf="showCreate==3">
           <label for="freeService" class="form-label">Free Service</label>
           <input type="text" class="form-control" id="freeService" formControlName="freeService">
+          <div *ngIf="facilityForm.controls.freeService.hasError('required')
+                && facilityForm.controls.freeService.touched">
+            <p style="color: red">Không dc để trống</p>
+          </div>
+
         </div>
 
         <div class="col-md-12 ">
           <label for="rentType" class="form-label">Rent Type</label>
           <select id="rentType" formControlName="rentType" class="form-select">
-            <option value="null" selected>Select Rent Type</option>
+            <option value="" selected>Select Rent Type</option>
             <option *ngFor="let item of rentType" [ngValue]="item.id">{{item.name}}</option>
           </select>
+          <div *ngIf="facilityForm.controls.rentType.hasError('required')
+                && facilityForm.controls.rentType.touched">
+            <p style="color: red">Không dc để trống</p>
+          </div>
         </div>
 
 
         <div class="col-12 mt-3" align="center">
-          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="submit" [disabled]="!facilityForm.valid" class="btn btn-primary">Save</button>
         </div>
       </form>
     </div>

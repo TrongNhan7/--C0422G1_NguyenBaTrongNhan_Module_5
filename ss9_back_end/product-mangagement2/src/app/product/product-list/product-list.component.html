@@ -1,0 +1,71 @@
+<h1>Danh sách sản phẩm</h1>
+<div class="row">
+  <div class="col-4">
+    <button class="btn btn-warning" routerLink="/create">Tạo mới sản phẩm</button>
+  </div>
+  <div class="col-4">
+    <select id="category" class="form-select"  (change)="getIdSearch($event)">
+      <option value="" selected>Chọn danh mục sản phẩm</option>
+      <option *ngFor="let category of categories" >{{category.nameCategory}}</option>
+    </select>
+  </div>
+  <div class="col-4">
+    <input type="text" [(ngModel)]="keyword" name="keyword">
+    <button (click)="search()">Tìm</button>
+    <button (click)="back()">Quay lại</button>
+  </div>
+</div>
+<table class="table table-warning">
+  <tr>
+    <td>STT</td>
+    <td>Tên</td>
+    <td>Giá</td>
+    <td>Mô tả</td>
+    <td>Thể loại</td>
+    <td colspan="2"></td>
+  </tr>
+  <tr *ngFor="let product of products; index as i">
+    <td>{{i + 1}}</td>
+    <td>{{product.name}}</td>
+    <td>{{product.price}}</td>
+    <td>{{product.description}}</td>
+    <td>{{product.category.nameCategory}}</td>
+    <td>
+      <button class="btn btn-warning">
+        <a [routerLink]="['/edit',product.id]">Edit</a>
+      </button>
+    </td>
+    <td>
+      <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#delete"
+              (click)="getIdNameDelete(product.id,product.name)">Delete
+      </button>
+    </td>
+  </tr>
+</table>
+<div class="row">
+  <button (click)="nextPage()">Next</button>
+  <button (click)="backPage()">Back</button>
+</div>
+
+
+<div class="modal" tabindex="-1" id="delete">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có muốn xóa: {{nameDelete}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="delete()" data-bs-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

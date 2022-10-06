@@ -9,7 +9,7 @@ export class CustomerService {
   customers: Customer[] = [
     {
       id: 1,
-      name: 'Hùng hay kẻ',
+      customerName: 'Hùng hay kẻ',
       birthday: '12/10/2001',
       gender: 'Nam',
       idCard: '6969696969',
@@ -19,6 +19,7 @@ export class CustomerService {
       address: 'Cái nhà giàu nhất Quận 3, Đà Nẵng'
     }
   ];
+
 
   constructor() {
   }

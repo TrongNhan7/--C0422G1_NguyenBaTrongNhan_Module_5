@@ -1,0 +1,84 @@
+{
+  "products": [
+    {
+      "name": "Nokia1212",
+      "price": 100,
+      "description": "điện thoại thông minh",
+      "category": {
+        "id": 1,
+        "nameCategory": "điện thoại"
+      },
+      "id": 1
+    },
+    {
+      "name": "Samsung",
+      "price": 200,
+      "description": "abc",
+      "category": {
+        "id": 1,
+        "nameCategory": "điện thoại"
+      },
+      "id": 2
+    },
+    {
+      "name": "Lot Khe",
+      "price": 20,
+      "description": "khá là ngứa",
+      "category": {
+        "id": 2,
+        "nameCategory": "si-lip"
+      },
+      "id": 3
+    },
+    {
+      "name": "Nokia3",
+      "price": "123",
+      "description": "abc",
+      "category": {
+        "id": 1,
+        "nameCategory": "điện thoại"
+      },
+      "id": 4
+    },
+    {
+      "name": "SS",
+      "price": "123",
+      "description": "123",
+      "category": {
+        "id": 2,
+        "nameCategory": "si-lip"
+      },
+      "id": 5
+    },
+    {
+      "name": "Tuan",
+      "price": "123",
+      "description": "điện thoại thông minh",
+      "category": {
+        "id": 1,
+        "nameCategory": "điện thoại"
+      },
+      "id": 6
+    },
+    {
+      "name": "Tuan",
+      "price": "123",
+      "description": "123",
+      "category": {
+        "id": 2,
+        "nameCategory": "si-lip"
+      },
+      "id": 7
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "nameCategory": "điện thoại"
+    },
+    {
+      "id": 2,
+      "nameCategory": "si-lip"
+    }
+  ]
+}

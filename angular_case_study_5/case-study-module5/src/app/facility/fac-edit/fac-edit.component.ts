@@ -35,7 +35,7 @@ export class FacEditComponent implements OnInit {
     this.showEdit = this.facility.facilityType.id;
     this.facilityForm = new FormGroup({
       id: new FormControl(this.facility.id),
-      name: new FormControl(this.facility.name),
+      name: new FormControl(this.facility.nameService),
       area: new FormControl(this.facility.area),
       cost: new FormControl(this.facility.cost),
       maxPeople: new FormControl(this.facility.maxPeople),

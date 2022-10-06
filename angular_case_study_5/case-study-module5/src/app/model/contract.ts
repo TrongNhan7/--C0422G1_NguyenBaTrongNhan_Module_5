@@ -9,4 +9,5 @@ export interface Contract {
   total: number;
   customer: Customer;
   facility: Facility;
+
 }

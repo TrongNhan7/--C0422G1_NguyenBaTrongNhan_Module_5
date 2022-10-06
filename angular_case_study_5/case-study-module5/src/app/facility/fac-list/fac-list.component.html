@@ -4,13 +4,13 @@
     <div class="card ms-5" style="width: 23rem;">
       <img src="../../../assets/img2/villasupergold.jpeg" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">{{facility.name}}</h5>
+        <h5 class="card-title">{{facility.nameService}}</h5>
         <p class="card-text">Kiểu thuê: {{facility.rentType.name}}</p>
         <p class="card-text">Loại dịch vụ: {{facility.facilityType.name}}</p>
         <a href="#" class="btn btn-warning" [routerLink]="['/fac-detail',facility.id]">Detail</a>
         <a href="#" class="btn btn-warning ms-2" [routerLink]="['/fac-edit',facility.id]">Edit</a>
         <button class="btn btn-warning float-end" data-bs-toggle="modal" data-bs-target="#delete"
-                (click)="getIdNameDelete(facility.id,facility.name)">Delete</button>
+                (click)="getIdNameDelete(facility.id,facility.nameService)">Delete</button>
       </div>
     </div>
   </div>

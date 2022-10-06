@@ -13,6 +13,11 @@ import {CustomerModule} from './customer/customer.module';
 import {FacilityModule} from './facility/facility.module';
 import {ContractModule} from './contract/contract.module';
 import {CustomerService} from './service/customer.service';
+import {EmployeeModule} from './employee/employee.module';
+import {EmployeeService} from './service/employee.service';
+import {PositionService} from './service/position.service';
+import {EducationService} from './service/education.service';
+import {DivisionService} from './service/division.service';
 
 
 @NgModule({
@@ -27,12 +32,17 @@ import {CustomerService} from './service/customer.service';
     AppRoutingModule,
     CustomerModule,
     FacilityModule,
-    ContractModule
+    ContractModule,
+    EmployeeModule,
   ],
   providers: [FacilityTypeService,
     RentTypeService,
     CustomerTypeService,
-    CustomerService],
+    CustomerService,
+    EmployeeService,
+    PositionService,
+    EducationService,
+    DivisionService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

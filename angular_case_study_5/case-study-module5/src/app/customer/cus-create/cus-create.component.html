@@ -7,54 +7,95 @@
     <div class="col-lg-3">
     </div>
     <div class="col-lg-6">
-      <form [formGroup]="customerForm" (ngSubmit)="submit()">
+      <form [formGroup]="customerForm" (ngSubmit)="submit()" novalidate>
         <table>
           <div class="col-md-12">
             <label for="name" class="form-label">Name Customer</label>
-            <input type="text" class="form-control" formControlName="name" id="name">
+            <input type="text" class="form-control" formControlName="customerName" id="name">
+            <div *ngIf="customerForm.controls.customerName.hasError('required')
+                && customerForm.controls.customerName.touched">
+              <p style="color: red">Không dc để trống</p>
+            </div>
+            <div *ngIf="customerForm.controls.customerName.hasError('pattern')
+                && customerForm.controls.customerName.touched">
+              <p style="color: red">Sai định dạng</p>
+            </div>
+
           </div>
           <div class="col-md-12">
             <label for="birthday" class="form-label">Birthday</label>
             <input type="date" class="form-control" id="birthday" formControlName="birthday">
+            <div *ngIf="customerForm.controls.birthday.hasError('required')
+                && customerForm.controls.birthday.touched">
+              <p style="color: red">Không dc để trống</p>
+            </div>
+            <div *ngIf="customerForm.controls.birthday.hasError('ageFalse')
+                && customerForm.controls.birthday.touched">
+              <p style="color: red">Trên 18 tuổi mới dc dô khách sạn nha cha!!!</p>
+            </div>
           </div>
 
           <div class="col-md-12">
             <label for="idCard" class="form-label">Id Card </label>
             <input type="text" class="form-control" id="idCard" formControlName="idCard">
+            <div *ngIf="customerForm.controls.idCard.hasError('pattern')
+                && customerForm.controls.idCard.touched">
+              <p style="color: red">Sai định dạng</p>
+            </div>
           </div>
+
           <div class="col-md-12">
             <label for="phone" class="form-label">Phone</label>
             <input type="text" class="form-control" id="phone" formControlName="phone">
+            <div *ngIf="customerForm.controls.phone.hasError('phoneValidator')
+                && customerForm.controls.phone.touched">
+              <p style="color: red">Sai định dạng</p>
+            </div>
           </div>
           <div class="col-md-12">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" formControlName="email">
-
+            <div *ngIf="customerForm.controls.email.hasError('required')
+                && customerForm.controls.email.touched">
+              <p style="color: red">Không dc để trống</p>
+            </div>
+            <div *ngIf="customerForm.controls.email.hasError('email')
+                && customerForm.controls.email.touched">
+              <p style="color: red">Sai định dạng</p>
+            </div>
           </div>
 
           <div class="col-md-12 ">
             <label for="address" class="form-label">Address</label>
             <input type="text" class="form-control" id="address" formControlName="address">
+            <div *ngIf="customerForm.controls.address.hasError('required')
+                && customerForm.controls.address.touched">
+              <p style="color: red">Không dc để trống</p>
+            </div>
           </div>
 
           <div class="col-md-12">
             <label for="gender" class="form-label">Gender</label>
             <select id="gender" formControlName="gender" class="form-select">
-              <option value="null" selected>Chọn giới tính</option>
+              <option value="" selected>Chọn giới tính</option>
               <option value='Nữ'>Nữ</option>
               <option value="Nam">Nam</option>
             </select>
+            <div *ngIf="customerForm.controls.gender.hasError('required')
+                && customerForm.controls.gender.touched">
+              <p style="color: red">Không dc để trống</p>
+            </div>
           </div>
           <div class="col-md-12 ">
             <label for="customerTypeId" class="form-label">Type Customer</label>
             <select id="customerTypeId" formControlName="customerType" class="form-select">
-              <option value="null" selected>Select Customer Type</option>
+              <option value="" selected>Select Customer Type</option>
               <option *ngFor="let item of customerTypeList" [ngValue]="item.id">{{item.name}}</option>
             </select>
           </div>
 
           <div class="col-12 mt-3" align="center">
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" [disabled]="!customerForm.valid" class="btn btn-primary" >Save</button>
           </div>
         </table>
       </form>

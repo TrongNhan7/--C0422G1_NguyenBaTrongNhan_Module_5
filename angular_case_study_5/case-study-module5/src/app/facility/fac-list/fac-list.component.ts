@@ -18,7 +18,10 @@ export class FacListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.facilities = this.facilityService.getAll();
+    this.facilityService.getAllFacility().subscribe(facilities => {
+      this.facilities = facilities.content;
+      console.log(this.facilities);
+    });
   }
 
   getIdNameDelete(id: number, name: string) {

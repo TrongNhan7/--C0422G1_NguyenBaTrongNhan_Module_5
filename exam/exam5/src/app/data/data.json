@@ -1,0 +1,33 @@
+{
+  "xe": [
+    {
+      "bienSoXe": "1234",
+      "loaiXe": "Giường nằm123",
+      "diemDi": "Đà Nẵng",
+      "diemDen": "Hà Nội",
+      "gioDi": "8:00",
+      "gioDen": "23:00",
+      "nhaXe": {
+        "id": 1,
+        "tenNhaXe": "Mai Linh",
+        "sdt": "0935845632",
+        "email": "mailinh12345@gmail.com"
+      },
+      "id": 1
+    }
+  ],
+  "nhaXe": [
+    {
+      "id": 1,
+      "tenNhaXe": "Mai Linh",
+      "sdt": "0935845632",
+      "email": "mailinh@gmail.com"
+    },
+    {
+      "id": 2,
+      "tenNhaXe": "Hoàng Long",
+      "sdt": "0971456382",
+      "email": "hoanglong@gmail.com"
+    }
+  ]
+}
