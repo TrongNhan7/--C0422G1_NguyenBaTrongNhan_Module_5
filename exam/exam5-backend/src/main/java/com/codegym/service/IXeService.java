@@ -12,7 +12,6 @@ public interface IXeService {
 
     void editXe(Xe xe);
 
-
     Xe findById(int id);
 
     void deleteById(Integer id);

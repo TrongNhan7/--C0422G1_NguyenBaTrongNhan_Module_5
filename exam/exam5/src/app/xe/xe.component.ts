@@ -16,28 +16,23 @@ export class XeComponent implements OnInit {
   bienSoXe: string;
   idDelete: number;
   keyword = '';
+  page = 0;
+  totalPage: number;
 
   constructor(private xeService: XeService, private nhaXeService: NhaXeService) {
+    this.getPage(0);
   }
 
   ngOnInit(): void {
     this.getAllXe();
-    // this.getAllNhaXe();
   }
 
   private getAllXe() {
-    this.xeService.getAll(this.keyword).subscribe(xe => {
+    this.xeService.getAll(this.keyword, this.page).subscribe(xe => {
       this.xeList = xe.content;
     });
     console.log(this.xeList);
   }
-
-  // private getAllNhaXe() {
-  //   this.nhaXeService.getAll().subscribe(nhaXe => {
-  //     this.nhaXeList = nhaXe;
-  //   })
-  // }
-
 
   getDelete(id: number, bienSoXe: string) {
     this.idDelete = id;
@@ -56,11 +51,27 @@ export class XeComponent implements OnInit {
     if (this.keyword == null) {
       return this.xeList;
     } else {
-      this.xeService.getAll(this.keyword).subscribe(xe => {
+      this.xeService.getAll(this.keyword, this.page).subscribe(xe => {
         this.xeList = xe.content;
       });
     }
     console.log(this.keyword);
     this.keyword = '';
+  }
+
+  getPage(currentPage: number) {
+    this.page = currentPage;
+    if (this.page < 0) {
+      this.page = 0;
+    } else {
+      if (this.page > this.totalPage) {
+        this.page = this.totalPage - 1;
+      }
+    }
+    this.xeService.getAll(this.keyword, this.page).subscribe(xes => {
+      this.xeList = xes.content;
+      this.totalPage = xes.totalPages;
+      console.log(this.totalPage);
+    });
   }
 }

@@ -12,8 +12,9 @@ export class XeService {
   constructor(private http: HttpClient) {
   }
 
-  getAll(keyword: string): Observable<any> {
-    return this.http.get(this.URL_XE + '?keyword=' + keyword);
+  getAll(keyword: string, page: number): Observable<any> {
+    console.log(page);
+    return this.http.get(this.URL_XE + '?page=' + page + '&keyword=' + keyword);
   }
 
   update(xe: Xe): Observable<Xe> {

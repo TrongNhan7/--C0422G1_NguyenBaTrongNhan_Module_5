@@ -48,7 +48,16 @@
     </tr>
     </tbody>
   </table>
-
+<nav>
+  <ul class="pagination">
+    <li class="page-item">
+      <button class="page-link" (click)="getPage(page - 1)">Previous</button>
+    </li>
+    <li class="page-item">
+      <a class="page-link" (click)="getPage(page + 1)">Next</a>
+    </li>
+  </ul>
+</nav>
 
 <div class="modal" tabindex="-1" id="delete">
   <div class="modal-dialog">
